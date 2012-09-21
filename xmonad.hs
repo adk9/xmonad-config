@@ -24,14 +24,14 @@ import qualified Data.Map        as M
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal = "/usr/bin/urxvt"
+myTerminal = "/usr/bin/gnome-terminal"
 
 
 ------------------------------------------------------------------------
 -- Workspaces
 -- The default number of workspaces (virtual screens) and their names.
 --
-myWorkspaces = ["1:term","2:web","3:code","4:vm","5:media"] ++ map show [6..9]
+myWorkspaces = ["1:term","2:web","3:code","4:comm"] ++ map show [5..9]
  
 
 ------------------------------------------------------------------------
@@ -54,12 +54,14 @@ myManageHook = composeAll
     , className =? "Galculator"     --> doFloat
     , className =? "Gimp"           --> doFloat
     , className =? "Google-chrome"  --> doShift "2:web"
+    , resource  =? "emacs"          --> doShift "3:code"
     , resource  =? "gpicview"       --> doFloat
     , resource  =? "kdesktop"       --> doIgnore
     , className =? "MPlayer"        --> doFloat
     , resource  =? "skype"          --> doFloat
-    , className =? "VirtualBox"     --> doShift "4:vm"
-    , className =? "Xchat"          --> doShift "5:media"
+    , className =? "Xchat"          --> doShift "4:comm"
+    , className =? "Empathy"        --> doShift "4:comm"
+    , className =? "Thunderbird"    --> doShift "4:comm"
     , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
 
 
@@ -135,7 +137,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   -- Launch dmenu via yeganesh.
   -- Use this to launch programs without a key binding.
   , ((modMask, xK_p),
-     spawn "exe=`dmenu_path | yeganesh` && eval \"exec $exe\"")
+     spawn "exe=`dmenu_path | /home/adkulkar/.cabal/bin/yeganesh` && eval \"exec $exe\"")
 
   -- Take a screenshot in select mode.
   -- After pressing this key binding, click a window, or draw a rectangle with
@@ -252,7 +254,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
      io (exitWith ExitSuccess))
 
   -- Restart xmonad.
-  , ((modMask, xK_q),
+  , ((modMask, xK_z),
      restart "xmonad" True)
   ]
   ++

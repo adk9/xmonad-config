@@ -9,25 +9,31 @@ PATH=$PATH:~/.cabal/bin:~/.xmonad/bin
 
 # Configure X
 xsetroot -cursor_name left_ptr &
+xset r rate 300 25
 xrdb -merge ~/.Xdefaults &
 xscreensaver -no-splash &
-feh --bg-center ~/wallpapers/city.jpeg &
+feh --bg-center ~/Pictures/wallpaper2.jpg &
 
 # Automatically mount removable media
-thunar --daemon &
+#thunar --daemon &
 
 # Start the system tray
 tray &
 
 # Start two terminals
-urxvt &
-urxvt &
+gnome-terminal &
+gnome-terminal &
 
 # Start two Chromium windows
-chromium &
-chromium &
+google-chrome &
 
-# Start xchat (IRC client)
-xchat &
+# Start emacs
+emacs &
+
+# Start empathy (chat client)
+empathy &
+
+# Start Thunderbird (email client)
+thunderbird &
 
 exec ck-launch-session dbus-launch --sh-syntax --exit-with-session xmonad
