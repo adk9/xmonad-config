@@ -13,7 +13,7 @@ PATH=$PATH:~/.cabal/bin:~/.xmonad/bin
 
 # Configure X
 xsetroot -cursor_name left_ptr &
-xset r rate 120 30
+xset r rate 180 30
 xrdb -merge ~/.Xdefaults &
 xscreensaver -no-splash &
 feh --bg-center ~/Pictures/wallpaper.jpg &
