@@ -31,7 +31,7 @@ myTerminal = "/usr/bin/gnome-terminal"
 -- Workspaces
 -- The default number of workspaces (virtual screens) and their names.
 --
-myWorkspaces = ["1:term","2:web","3:code","4:comm"] ++ map show [5..9]
+myWorkspaces = ["1:term","2:code","3:web","4:comm"] ++ map show [5..9]
  
 
 ------------------------------------------------------------------------
@@ -49,12 +49,12 @@ myWorkspaces = ["1:term","2:web","3:code","4:comm"] ++ map show [5..9]
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll
-    [ className =? "Chromium"       --> doShift "2:web"
+    [ className =? "Chromium"       --> doShift "3:web"
     , resource  =? "desktop_window" --> doIgnore
     , className =? "Galculator"     --> doFloat
     , className =? "Gimp"           --> doFloat
-    , className =? "Google-chrome"  --> doShift "2:web"
-    , resource  =? "emacs"          --> doShift "3:code"
+    , className =? "Google-chrome"  --> doShift "3:web"
+    , resource  =? "emacs"          --> doShift "2:code"
     , resource  =? "gpicview"       --> doFloat
     , resource  =? "kdesktop"       --> doIgnore
     , className =? "MPlayer"        --> doFloat
@@ -132,7 +132,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   -- Lock the screen using xscreensaver.
   , ((modMask .|. controlMask, xK_l),
-     spawn "xscreensaver-command -lock")
+     spawn "xlock")
 
   -- Launch dmenu via yeganesh.
   -- Use this to launch programs without a key binding.
