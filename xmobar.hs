@@ -2,7 +2,6 @@
 -- Author: Vic Fryzel
 -- http://github.com/vicfryzel/xmonad-config
 
--- This is setup for dual 1920x1080 monitors, with the right monitor as primary
 Config {
     font = "xft:Fixed-8",
     bgColor = "#000000",

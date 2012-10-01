@@ -133,7 +133,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
   -- Lock the screen using xscreensaver.
   , ((modMask .|. controlMask, xK_l),
-     spawn "xscreensaver-command -lock")
+     spawn "xlock")
 
   -- Launch dmenu via yeganesh.
   -- Use this to launch programs without a key binding.
