@@ -40,4 +40,10 @@ empathy &
 # Start Thunderbird (email client)
 thunderbird &
 
+eval $(gnome-keyring-daemon --start)
+export GNOME_KEYRING_CONTROL
+export GNOME_KEYRING_PID
+export GPG_AGENT_INFO
+export SSH_AUTH_SOCK
+
 exec ck-launch-session dbus-launch --sh-syntax --exit-with-session xmonad
