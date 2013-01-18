@@ -28,7 +28,7 @@ tray &
 gnome-terminal &
 gnome-terminal &
 
-# Start two Chromium windows
+# Start a browser
 google-chrome &
 
 # Start emacs
@@ -45,5 +45,7 @@ export GNOME_KEYRING_CONTROL
 export GNOME_KEYRING_PID
 export GPG_AGENT_INFO
 export SSH_AUTH_SOCK
+
+pulseaudio --start &
 
 exec ck-launch-session dbus-launch --sh-syntax --exit-with-session xmonad
