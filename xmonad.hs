@@ -9,6 +9,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
+import XMonad.Actions.CycleWS
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Spiral
@@ -62,6 +63,7 @@ myManageHook = composeAll
     , resource  =? "skype"          --> doFloat
     , className =? "Xchat"          --> doShift "4:comm"
     , className =? "Empathy"        --> doShift "4:comm"
+    , className =? "Pidgin"        --> doShift "4:comm"
     , className =? "Thunderbird"    --> doShift "4:comm"
     , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
 
@@ -228,11 +230,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
      windows W.swapUp    )
 
   -- Shrink the master area.
-  , ((modMask, xK_h),
+  , ((modMask .|. shiftMask, xK_h),
      sendMessage Shrink)
 
   -- Expand the master area.
-  , ((modMask, xK_l),
+  , ((modMask .|. shiftMask, xK_l),
      sendMessage Expand)
 
   -- Push window back into tiling.
@@ -257,6 +259,12 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   -- Restart xmonad.
   , ((modMask, xK_z),
      restart "xmonad" True)
+  
+  -- Cycle workspaces
+  -- With DynamicWindows
+  , ((modMask .|. controlMask, xK_Left), prevScreen >> (moveTo Prev NonEmptyWS) >> nextScreen >> (moveTo Prev NonEmptyWS))
+  , ((modMask .|. controlMask, xK_Right), (moveTo Next NonEmptyWS) >> prevScreen >> (moveTo Next NonEmptyWS) >> nextScreen)
+  , ((modMask .|. controlMask, xK_Down), nextScreen)
   ]
   ++
  
@@ -264,7 +272,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
   -- mod-shift-[1..9], Move client to workspace N
   [((m .|. modMask, k), windows $ f i)
       | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
-      , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+      , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
   ++
 
   -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
